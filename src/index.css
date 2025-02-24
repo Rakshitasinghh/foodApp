@@ -1,6 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base{
+  @font-face {
+    font-family: 'ClashDisplay-Regular';
+    src: url('/src/assets/fonts/ClashDisplay-Regular.woff2');
+
+  }
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

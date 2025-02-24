@@ -1,5 +1,4 @@
 import foody from "../assets/images/foody.png";
-// import cart from "../assets/icon/cart.svg";
 import cart from "../assets/icons/cart.svg"
 import { Link } from "react-router-dom";
 
