@@ -1,4 +1,5 @@
-import Button from "./elements/Button";
+import Button from "./Button";
+import AboutImage from "C:/Users/raksh/Desktop/food-app/src/assets/images/pizza_banner.png"
 
 export const Banner = () => {
     return (
@@ -19,7 +20,7 @@ export const Banner = () => {
             </div>
             <div className="banner-image w-full md:w-1/2 p-3 flex justify-end">
                 <img 
-                    src="C:\Users\raksh\Desktop\food-app\src\assets\images\pizza_banner.png" 
+                    src={AboutImage} 
                     alt="banner" 
                     className="max-h-95"
                 />
@@ -27,3 +28,5 @@ export const Banner = () => {
         </div>
     );
 };
+
+export default Banner;

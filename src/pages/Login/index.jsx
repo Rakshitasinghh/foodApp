@@ -1,6 +1,8 @@
+import Home from "../home";
+
 const Login =() => {
     return(
-        <>Home</>
+        <Home/>
     )
 }
 

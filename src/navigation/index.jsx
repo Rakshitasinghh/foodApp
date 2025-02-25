@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes } from "react-router-dom";
 import { Header } from "../Components/Header";
-import home from "../pages/home";
+import Home from "../pages/home";
 import Login from "../pages/Login";
 import Cart from "../pages/Cart";
 import Register from "../pages/Register";
@@ -13,7 +13,7 @@ const Navigation = () => {
         <BrowserRouter>
             <Header />
             <Routes>
-                <Route path="/" element={<home />} />
+                <Route path="/" element={<Home />} />
                 <Route path="/Login" element={<Login/>} />
                 <Route path="/Register" t={<Register />} />
                 <Route path="/Menu" element={<Menu />} />

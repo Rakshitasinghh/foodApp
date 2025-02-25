@@ -1,10 +1,14 @@
-import { Banner } from "../../Components/Banner";
+import Banner from "../../Components/Banner"; 
+import About from "../../Components/About";
+
 
 
 const Home =() => {
     return(
-        // <div className="text-white">Home</div>
-        <Banner/>
+        <>
+         <Banner/>
+         <About/>   
+        </>
     )
 }
 
