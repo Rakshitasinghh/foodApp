@@ -1,30 +1,33 @@
-const express = require ("express");
-const bodyParser = require ("body-parser");
-const cors = require ("cors");
+const express = require("express");
+const router = express.Router();
 
-const db = require('./db')
+const Product = require("../models/productModel");
 
-const app = express();
-const productRouter = require('./routes/productRouter');
+router.get("/products", async (req, res) => {
+    try {
+        const products = await Product.find();
+        res.status(200).send({ data: products });
+    } catch (err) {
+        res.status(400).send({ error: err });
+    }
+});
 
-var corsOptions= {
-    origin: 'http://localhost:3000',
-}
+router.get("/products-by-categories", async (req, res) => {
+    try {
+        const products = await Product.aggregate([
+            { $match: {} },
+            {
+                $group: {
+                    _id: "$category",
+                    products: { $push: "$$ROOT" },
+                },
+            },
+            { $project: { name: "$_id", products: 1, _id: 0 } },
+        ]);
+        res.status(200).send({ data: products });
+    } catch (err) {
+        res.status(400).send({ error: err });
+    }
+});
 
-app.use(cors(corsOptions));
-
-  app.use(bodyParser.json());
-  app.use(bodyParser.urlencoded({ extended:true}));
-
-  db.on('error', console.error.bind(console,'MongoDb connection error:'))
-
-  app.get("/",(req,res)=> {
-    res.json({message:"Welcome to Food Ordering"});
-  });
-
-  const PORT = process.env.PORT || 8080;
-  app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-  });
-  app.use('/api/',productRouter);
-
+module.exports = router;
