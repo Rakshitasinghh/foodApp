@@ -1,33 +1,18 @@
 const express = require("express");
-const router = express.Router();
+const mongoose = require("mongoose");
+const productRouter = require("./routes/productRouter");
 
-const Product = require("../models/productModel");
+const app = express();
+app.use(express.json()); 
 
-router.get("/products", async (req, res) => {
-    try {
-        const products = await Product.find();
-        res.status(200).send({ data: products });
-    } catch (err) {
-        res.status(400).send({ error: err });
-    }
-});
+app.use("/api", productRouter); 
 
-router.get("/products-by-categories", async (req, res) => {
-    try {
-        const products = await Product.aggregate([
-            { $match: {} },
-            {
-                $group: {
-                    _id: "$category",
-                    products: { $push: "$$ROOT" },
-                },
-            },
-            { $project: { name: "$_id", products: 1, _id: 0 } },
-        ]);
-        res.status(200).send({ data: products });
-    } catch (err) {
-        res.status(400).send({ error: err });
-    }
-});
+mongoose.connect("mongodb://localhost:27017/yourDatabaseName", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+}).then(() => {
+    console.log("Connected to MongoDB");
+}).catch(err => console.log(err));
 
-module.exports = router;
+const PORT = 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
