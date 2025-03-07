@@ -1,18 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { ProductPreviewCard } from "./ProductPreviewCard";
+import ProductPreviewCard  from "./ProductPreviewCard";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
-
-
-
 export const ProductsPreview = () => {
     const [products, setProducts] = useState([]);
-    
 
     const responsive = {
         superLargeDesktop: {
-          // the naming can be any, depends on you.
           breakpoint: { max: 4000, min: 3000 },
           items: 5
         },
@@ -28,31 +23,26 @@ export const ProductsPreview = () => {
           breakpoint: { max: 464, min: 0 },
           items: 1
         }
-      };
+    };
 
     useEffect(() => {
         fetch('http://localhost:8080/api/products')
             .then(response => response.json())
             .then(data => setProducts(data?.data))
             .catch(e => console.log(e))
-    }, [])
+    }, []);
 
-    
-    
     return (
         <div className="container mx-auto pb-4 w-2/3 text-white bg-black">
-          <h2>Products</h2>
             <Carousel responsive={responsive}>
-            {
-                products.length > 0 && products.map((product, index) => {
-                    return (
-                        <div className="w-full p-3">
-                            <ProductPreviewCard key={index} product={product}  />
-                        </div>
-                    )
-                })
-            }
+                {products.length > 0 && products.map((product, index) => (
+                    <div key={index} className="w-full p-3">
+                        <ProductPreviewCard product={product} />
+                    </div>
+                ))}
             </Carousel>
         </div>
-    )
-}
+    );
+};
+
+export default ProductsPreview;
