@@ -26,10 +26,15 @@ export const ProductsPreview = () => {
     };
 
     useEffect(() => {
-        fetch('http://localhost:8080/api/products')
-            .then(response => response.json())
-            .then(data => setProducts(data?.data))
-            .catch(e => console.log(e))
+      fetch("http://localhost:5000/api/data")
+        .then((res) => res.json())
+        .then((data) => console.log(data))
+         .catch((error) => console.error("Fetch error:", error));
+
+       // fetch('http://localhost:5000/api/products')
+            //.then(response => response.json())
+            //.then(data => setProducts(data?.data))
+            //.catch(e => console.log(e))
     }, []);
 
     return (
@@ -45,4 +50,4 @@ export const ProductsPreview = () => {
     );
 };
 
-export default ProductsPreview;
+export default ProductsPreview; // tried fixing errors
