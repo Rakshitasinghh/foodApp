@@ -26,7 +26,7 @@ export const ProductsPreview = () => {
     };
 
     useEffect(() => {
-      fetch("http://localhost:5000/api/data")
+      fetch("http://localhost:8080/api/data")
         .then((res) => res.json())
         .then((data) => console.log(data))
          .catch((error) => console.error("Fetch error:", error));
